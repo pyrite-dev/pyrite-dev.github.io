@@ -21,7 +21,7 @@ jobs:
     - name: Install packages
       run: sudo apt-get install tcl
     - name: Get docgen
-      run: wget -O https://github.com/nishistack/docgen/raw/refs/heads/master/docgen -O docgen && chmod +x docgen
+      run: wget https://github.com/nishistack/docgen/raw/refs/heads/master/docgen -O docgen && chmod +x docgen
     - name: Build page
       run: ./docgen
     - name: Deploy
