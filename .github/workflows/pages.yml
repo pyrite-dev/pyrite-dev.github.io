@@ -1,0 +1,32 @@
+name: "Publish GitHub Pages"
+
+on:
+  push:
+    branches:
+    - master
+  workflow_dispatch:
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Install packages
+      run: sudo apt-get install tcl
+    - name: Get docgen
+      run: wget -O https://github.com/nishistack/docgen/raw/refs/heads/master/docgen -O docgen && chmod +x docgen
+    - name: Build page
+      run: ./docgen
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        branch: gh-pages
+        folder: build
