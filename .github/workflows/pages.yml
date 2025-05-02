@@ -20,8 +20,6 @@ jobs:
       uses: actions/checkout@v4
     - name: Install packages
       run: sudo apt-get install tcl
-    - name: Get docgen
-      run: wget https://github.com/nishistack/docgen/raw/refs/heads/master/docgen -O docgen && chmod +x docgen
     - name: Build page
       run: ./docgen
     - name: Deploy
